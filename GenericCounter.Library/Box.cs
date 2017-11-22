@@ -8,6 +8,7 @@ namespace GenericCounter.Library
 {
     public interface IBox : ICountable
     {
+        void Empty();
     }
 
     public class Box<T> : IBox
@@ -19,6 +20,11 @@ namespace GenericCounter.Library
         public Box(IEnumerable<T> contents)
         {
             _contents = new List<T>(contents);
+        }
+
+        public void Empty()
+        {
+            _contents.Clear();
         }
     }
 }
