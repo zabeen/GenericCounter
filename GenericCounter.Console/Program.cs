@@ -11,9 +11,10 @@ namespace GenericCounter.Console
     {
         static void Main(string[] args)
         {
-            WriteCounterCount("Apple", CreateAppleCounter());
+            WriteCounterCount("Loose Apples", CreateAppleCounter());
             WriteCounterCount("Cart", CreateCartCounter());
-
+            WriteCounterCount("Boxed Apples", CreateBoxOfAppleCounter());
+        
             System.Console.ReadLine();
         }
 
@@ -45,6 +46,14 @@ namespace GenericCounter.Console
             cartCounter.Add(cart2);
 
             return cartCounter;
+        }
+
+        static ICounter<Box<Apple>> CreateBoxOfAppleCounter()
+        {
+            var boxCounter = new Counter<Box<Apple>>();
+            boxCounter.Add(GetBoxOfApples(15));
+            boxCounter.Add(GetBoxOfApples(3));
+            return boxCounter;
         }
 
         static Box<Apple> GetBoxOfApples(int numberOfApples)
