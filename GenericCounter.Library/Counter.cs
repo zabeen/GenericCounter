@@ -6,11 +6,21 @@ using System.Threading.Tasks;
 
 namespace GenericCounter.Library
 {
-    public class Counter<T> where T : ICountable
+    public interface ICounter
     {
-        private List<T> _items = new List<T>();
+        int Count();
+    }
 
-        public void Add(T item)
+    public interface ICounter<in TCountable> : ICounter where TCountable : ICountable
+    {
+        void Add(TCountable item);
+    }
+
+    public class Counter<TCountable> : ICounter<TCountable> where TCountable : ICountable
+    {
+        private List<TCountable> _items = new List<TCountable>();
+
+        public void Add(TCountable item)
         {
             _items.Add(item);
         }

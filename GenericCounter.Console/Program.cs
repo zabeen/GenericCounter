@@ -17,20 +17,20 @@ namespace GenericCounter.Console
             System.Console.ReadLine();
         }
 
-        static void WriteCounterCount(string counterName, Counter<ICountable> counter)
+        static void WriteCounterCount(string counterName, ICounter counter)
         {
             System.Console.WriteLine($"{counterName} counter: {counter.Count()}");
         }
 
-        static Counter<ICountable> CreateAppleCounter()
+        static ICounter<Apple> CreateAppleCounter()
         {
-            var appleCounter = new Counter<ICountable>();
+            var appleCounter = new Counter<Apple>();
             appleCounter.Add(new Apple());
             appleCounter.Add(new Apple());
             return appleCounter;
         }
 
-        static Counter<ICountable> CreateCartCounter()
+        static ICounter<Cart> CreateCartCounter()
         {
             var oneApple = GetBoxOfApples(1);
             var twoApples = GetBoxOfApples(2);
@@ -40,7 +40,7 @@ namespace GenericCounter.Console
             var cart1 = new Cart(new List<IBox>() { oneApple, twoApples });
             var cart2 = new Cart(new List<IBox>() { threeApples, fourApples });
 
-            var cartCounter = new Counter<ICountable>();
+            var cartCounter = new Counter<Cart>();
             cartCounter.Add(cart1);
             cartCounter.Add(cart2);
 
