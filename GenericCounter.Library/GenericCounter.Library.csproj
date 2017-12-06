@@ -46,6 +46,7 @@
     <Compile Include="Counter.cs" />
     <Compile Include="ICountable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shoes.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
