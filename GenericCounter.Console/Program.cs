@@ -1,17 +1,16 @@
-﻿using System;
+﻿using GenericCounter.Library;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GenericCounter.Library;
+using System.Drawing;
 
 namespace GenericCounter.Console
 {
     class Program
     {
         static void Main(string[] args)
-        {
-            WriteCounterCount("Loose Apples", CreateAppleCounter());
+        {;
+            var applesCounter = CreateAppleCounter();
+            WriteCounterCount("Loose Apples", applesCounter);
             WriteCounterCount("Cart", CreateCartCounter());
             WriteCounterCount("Boxed Apples", CreateBoxOfAppleCounter());
             WriteCounterCount("Box of ICountables", CreateBoxOfICountableCounter());
@@ -26,8 +25,8 @@ namespace GenericCounter.Console
 
         static ICounter<Apple> CreateAppleCounter()
         {
-            var appleCounter = new Counter<Apple>();
-            appleCounter.Add(new Apple());
+            var appleCounter = new Counter<ICountable>();
+            appleCounter.Add(new Apple(Color.Red));
             appleCounter.Add(new Apple());
             return appleCounter;
         }
