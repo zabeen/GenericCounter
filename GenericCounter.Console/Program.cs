@@ -47,7 +47,7 @@ namespace GenericCounter.Console
 
         static ICounter<Apple> CreateRedAppleCounter()
         {
-            var appleCounter = new Counter<Apple>((a) => a.Colour.Equals(Color.Red));
+            var appleCounter = new Counter<Apple>(a => a.Colour.Equals(Color.Red));
             appleCounter.Add(new Apple(Color.Red));
             appleCounter.Add(new Apple());
             appleCounter.Add(new Apple(Color.Green));

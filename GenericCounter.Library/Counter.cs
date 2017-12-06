@@ -19,7 +19,7 @@ namespace GenericCounter.Library
     public class Counter<TCountable> : ICounter<TCountable> where TCountable : ICountable
     {
         private List<TCountable> _items = new List<TCountable>();
-        private Func<TCountable, bool> _shouldBeCounted = (i) => true;
+        private Func<TCountable, bool> _shouldBeCounted = i => true;
 
         public Counter() { }
 
