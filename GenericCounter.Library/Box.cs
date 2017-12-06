@@ -11,15 +11,15 @@ namespace GenericCounter.Library
         void Empty();
     }
 
-    public class Box<T> : IBox
+    public class Box<TCountable> : IBox where TCountable : ICountable
     {
-        public int Count => _contents.Count;
+        public int Count => _contents.Sum(c => c.Count);
 
-        private List<T> _contents;
+        private List<TCountable> _contents;
 
-        public Box(IEnumerable<T> contents)
+        public Box(IEnumerable<TCountable> contents)
         {
-            _contents = new List<T>(contents);
+            _contents = new List<TCountable>(contents);
         }
 
         public void Empty()

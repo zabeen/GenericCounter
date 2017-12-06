@@ -14,6 +14,7 @@ namespace GenericCounter.Console
             WriteCounterCount("Loose Apples", CreateAppleCounter());
             WriteCounterCount("Cart", CreateCartCounter());
             WriteCounterCount("Boxed Apples", CreateBoxOfAppleCounter());
+            WriteCounterCount("Box of ICountables", CreateBoxOfICountableCounter());
         
             System.Console.ReadLine();
         }
@@ -53,6 +54,13 @@ namespace GenericCounter.Console
             var boxCounter = new Counter<Box<Apple>>();
             boxCounter.Add(GetBoxOfApples(15));
             boxCounter.Add(GetBoxOfApples(3));
+            return boxCounter;
+        }
+
+        static ICounter<Box<ICountable>> CreateBoxOfICountableCounter()
+        {
+            var boxCounter = new Counter<Box<ICountable>>();
+            boxCounter.Add(new Box<ICountable>(new List<ICountable>(){new Apple(), new Shoes()}));
             return boxCounter;
         }
 
