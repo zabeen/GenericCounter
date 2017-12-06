@@ -9,8 +9,8 @@ namespace GenericCounter.Console
     {
         static void Main(string[] args)
         {;
-            var applesCounter = CreateAppleCounter();
-            WriteCounterCount("Loose Apples", applesCounter);
+            WriteCounterCount("Loose Apples", CreateAppleCounter());
+            WriteCounterCount("Loose Red Apples", CreateRedAppleCounter());
             WriteCounterCount("Cart", CreateCartCounter());
             WriteCounterCount("Boxed Apples", CreateBoxOfAppleCounter());
             WriteCounterCount("Box of ICountables", CreateBoxOfICountableCounter());
@@ -23,11 +23,34 @@ namespace GenericCounter.Console
             System.Console.WriteLine($"{counterName} counter: {counter.Count()}");
         }
 
+        static Box<Apple> GetBoxOfApples(int numberOfApples)
+        {
+            var apples = new List<Apple>();
+
+            for (int i = 0; i < numberOfApples; i++)
+            {
+                apples.Add(new Apple());
+            }
+
+            return new Box<Apple>(apples);
+        }
+
+        #region CreateCounters
+
         static ICounter<Apple> CreateAppleCounter()
         {
-            var appleCounter = new Counter<ICountable>();
+            var appleCounter = new Counter<Apple>();
+            appleCounter.Add(new Apple());
+            appleCounter.Add(new Apple());
+            return appleCounter;
+        }
+
+        static ICounter<Apple> CreateRedAppleCounter()
+        {
+            var appleCounter = new Counter<Apple>((a) => a.Colour.Equals(Color.Red));
             appleCounter.Add(new Apple(Color.Red));
             appleCounter.Add(new Apple());
+            appleCounter.Add(new Apple(Color.Green));
             return appleCounter;
         }
 
@@ -59,20 +82,10 @@ namespace GenericCounter.Console
         static ICounter<Box<ICountable>> CreateBoxOfICountableCounter()
         {
             var boxCounter = new Counter<Box<ICountable>>();
-            boxCounter.Add(new Box<ICountable>(new List<ICountable>(){new Apple(), new Shoes()}));
+            boxCounter.Add(new Box<ICountable>(new List<ICountable>() { new Apple(), new Shoes() }));
             return boxCounter;
         }
 
-        static Box<Apple> GetBoxOfApples(int numberOfApples)
-        {
-            var apples = new List<Apple>();
-
-            for (int i = 0; i < numberOfApples; i++)
-            {
-                apples.Add(new Apple());
-            }
-
-            return new Box<Apple>(apples);
-        }
+        #endregion
     }
 }

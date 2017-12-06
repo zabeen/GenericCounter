@@ -19,6 +19,14 @@ namespace GenericCounter.Library
     public class Counter<TCountable> : ICounter<TCountable> where TCountable : ICountable
     {
         private List<TCountable> _items = new List<TCountable>();
+        private Func<TCountable, bool> _shouldBeCounted = (i) => true;
+
+        public Counter() { }
+
+        public Counter(Func<TCountable, bool> shouldBeCounted)
+        {
+            _shouldBeCounted = shouldBeCounted;
+        }
 
         public void Add(TCountable item)
         {
@@ -27,7 +35,7 @@ namespace GenericCounter.Library
 
         public int Count()
         {
-            return _items.Sum(i => i.Count);
+            return _items.Where(i => _shouldBeCounted(i)).Sum(i => i.Count);
         }
     }
 }
