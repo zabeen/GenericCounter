@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GenericCounter.Library
 {
@@ -35,7 +33,7 @@ namespace GenericCounter.Library
 
         public int Count()
         {
-            return _items.Where(i => _shouldBeCounted(i)).Sum(i => i.Count);
+            return _items.Where(_shouldBeCounted).Sum(i => i.Count);
         }
     }
 }
